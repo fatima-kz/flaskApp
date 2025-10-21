@@ -5,7 +5,7 @@
 - Member 2 (Frontend/API Integration): templates/static (placeholder)
 - Member 3 (DevOps): Dockerfile, tests, GitHub Actions pipeline
 
-## How to build & run locally
+## How to build & run locallydd
 1. Clone repo
 2. `cd main`
 3. Create venv: `python -m venv .venv && source .venv/bin/activate`
