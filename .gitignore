@@ -1,0 +1,71 @@
+# Python bytecode and cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Packaging / build
+build/
+dist/
+.eggs/
+*.egg-info/
+.eggs/
+*.egg
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# Test/coverage caches
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+.mypy_cache/
+.ruff_cache/
+.cache/
+
+# Flask / app data
+instance/
+*.db
+*.sqlite3
+
+# Environment files
+.env
+.env.*
+*.env
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Editors/IDE
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Logs
+*.log
+logs/
+
+# Node (if any frontend work)
+node_modules/
+
+# Wheel / installer artifacts
+*.whl
+*.spec
+
+# Misc temporary files
+*.tmp
+~$*
