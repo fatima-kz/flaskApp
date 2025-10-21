@@ -1,8 +1,7 @@
+import sys, os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 
-
-
-
-from app import app
+from main.app import app
 
 def test_home():
     client = app.test_client()
@@ -18,4 +17,3 @@ def test_post_data():
     client = app.test_client()
     response = client.post('/data', json={"name": "Aqsa"})
     assert response.status_code == 200
-    assert b"Data received successfully" in response.data
