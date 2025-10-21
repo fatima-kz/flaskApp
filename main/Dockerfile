@@ -1,26 +1,23 @@
-FROM python:3.11-slim
+# syntax=docker/dockerfile:1.4
+# Use official lightweight Python image
+FROM python:3.10-slim
 
-# Prevent Python from writing .pyc files and enable unbuffered logs
-ENV PYTHONDONTWRITEBYTECODE=1 \
-	PYTHONUNBUFFERED=1 \
-	PIP_NO_CACHE_DIR=1
-
+# Set working dir
 WORKDIR /app
 
-# Install system dependencies (if you later need, add build tools here)
-RUN apt-get update -y && apt-get install -y --no-install-recommends \
-	curl \
-	&& rm -rf /var/lib/apt/lists/*
+# Copy requirements first to leverage build cache
+COPY requirements.txt .
+# Use BuildKit cache for pip to speed up subsequent builds
+ENV PIP_DISABLE_PIP_VERSION_CHECK=1 \
+	PYTHONDONTWRITEBYTECODE=1 \
+	PYTHONUNBUFFERED=1
+RUN --mount=type=cache,target=/root/.cache/pip \
+	pip install -r requirements.txt
 
-# Copy requirements first to leverage Docker layer caching
-COPY requirements.txt ./
-RUN pip install --upgrade pip && pip install -r requirements.txt
+# Copy app
+COPY . .
 
-# Copy application code
-COPY . ./
-
-# Expose Flask default port
+# Expose port and run
 EXPOSE 5000
-
-# Default command: run the app (uses __main__ guard in main/app.py)
+ENV FLASK_APP=app.py
 CMD ["python", "app.py"]
