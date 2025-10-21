@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Flask Frontend Integration</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Welcome to Flask Frontend</h1>
+    <form id="dataForm">
+        <label>Enter your name:</label>
+        <input type="text" id="name" required>
+        <button type="submit">Send</button>
+    </form>
+
+    <div id="response"></div>
+
+    <script>
+        document.getElementById('dataForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+
+            const res = await fetch('/data', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name })
+            });
+            const data = await res.json();
+            document.getElementById('response').innerText = JSON.stringify(data, null, 2);
+        });
+    </script>
+</body>
+</html>

@@ -1,11 +1,11 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 
 app = Flask(__name__)
 
-# Home route
+# Home route - render frontend page
 @app.route('/')
 def home():
-    return "Welcome to the Flask Lab Project Backend!"
+    return render_template('index.html')
 
 # Health check route
 @app.route('/health')
