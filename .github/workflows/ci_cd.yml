@@ -52,14 +52,14 @@ jobs:
           docker build -t "${{ github.repository }}:latest" .
 
       - name: Login to DockerHub
-        if: ${{ secrets.DOCKERHUB_USERNAME != '' && secrets.DOCKERHUB_TOKEN != '' }}
+        if: ${{ secrets.DOCKERHUB_USERNAME && secrets.DOCKERHUB_TOKEN }}
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Push to DockerHub (optional)
-        if: ${{ secrets.DOCKERHUB_USERNAME != '' && secrets.DOCKERHUB_TOKEN != '' }}
+        if: ${{ secrets.DOCKERHUB_USERNAME && secrets.DOCKERHUB_TOKEN }}
         run: |
           IMAGE_NAME="${{ secrets.DOCKERHUB_USERNAME }}/flask-lab-project:${{ github.sha }}"
           docker tag "${{ github.repository }}:latest" "$IMAGE_NAME"
